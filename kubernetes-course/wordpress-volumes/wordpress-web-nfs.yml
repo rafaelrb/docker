@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: wordpress-deployment
 spec:
-  replicas: 5
+  replicas: 2
   template:
     metadata:
       labels:
@@ -66,10 +66,9 @@ spec:
           - name: WORDPRESS_DB_HOST
             value: wordpress-db
         volumeMounts:
-#        - mountPath: /var/www/html/wp-content/uploads
-        - mountPath: /var/www
+        - mountPath: /var/www/html/wp-content/uploads
           name: uploads
       volumes:
       - name: uploads
         persistentVolumeClaim: 
-          claimName: wp-uploads
+          claimName: db-storage

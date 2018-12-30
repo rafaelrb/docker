@@ -11,14 +11,14 @@ spec:
     spec:
       containers:
       - name: k8s-demo
-        image: wordpress:4-php7.0
+        image: nginx
         ports:
         - name: nodejs-port
           containerPort: 3000
         volumeMounts:
-        - mountPath: /myvol
-          name: myvolume
+        - mountPath: "/opt"
+          name: nfs
       volumes:
-      - name: myvolume
-        awsElasticBlockStore:
-          volumeID: # insert AWS EBS volumeID here
+      - name: nfs
+        persistentVolumeClaim:
+          claimName: nfs-pvc
